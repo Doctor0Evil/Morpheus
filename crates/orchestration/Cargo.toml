@@ -1,0 +1,10 @@
+[package]
+name = "orchestration"
+version = "0.1.0"
+edition = "2021"
+description = "Orchestration layer for neuromorph contracts and cross-repo workflows."
+license = "MIT"
+repository = "https://github.com/your-user/morpheus-neuromorph"
+
+[dependencies]
+core-contract = { path = "../core-contract" }
