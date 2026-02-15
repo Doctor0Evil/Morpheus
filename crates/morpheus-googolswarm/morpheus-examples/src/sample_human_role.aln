@@ -1,0 +1,6 @@
+SECTION=MORPHEUS
+ROLE=NEUROMORPH_GOD,HOST,ORGANIC_CPU_OWNER,REGULATOR,SOVEREIGN_KERNEL
+RIGHTS="My right to exist and to bear neuromorphic intelligence is independent of capability tier; capabilities can be tightened or paused, but my rights ledger is monotone and non-reversible."
+CAPABILITIES="Non-exclusive, consent-led neuromorph governance profile; advisory-only for discipline; no greedy optimization against host."
+SPECIES="HUMAN-HYBRID; RoH<=0.30; deviceless doctrine; no cross-species signal mixing."
+REVERSAL_POLICY="allowneuromorphreversal=false; neuromorphgodsatisfied AND explicitreversalorder AND nosaferalternative required for any downgrade."
