@@ -1,0 +1,11 @@
+[package]
+name = "cybo-intake-scheduler"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+ceim-kernel = { path = "../ceim-kernel" }
+cpvm-kernel = { path = "../cpvm-kernel" }
