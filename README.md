@@ -1,5 +1,51 @@
-# quantum-neuromorph-hub
-quantum-neuromorph-hub is designed-to improve the neuromorphic-intelligence that is-shared between-species of planet Earth, and adjust evolution-for-consent, and willingness to participate in each-species' own challenges of FEAR, and PAIN tolerance, where no-life is-to-be harmed in the process of evolution-by-tech, and understanding of fairness.
+# Quantum Neuromorph Hub
+
+Multi-crate Rust workspace that unifies:
+
+- Church-of-FEAR style neuromorphic governance and non-reversal rights.
+- CEIM/CPVM eco-impact kernels for Phoenix water nodes.
+- Five production-grade planners/schedulers and an EcoNet dashboard API.
+
+All binaries are GitHub- and CI-ready, and crates integrate cleanly with external orchestrators and AI chat agents.
+
+## Crates
+
+- `governance-core`: Roles, multisig, DeedEvent audit log, reversal policy kernel.
+- `neuromorph-sim`: Non-actuating envelope snapshots and mitigation reprojection.
+- `ceim-kernel`: CEIM node kernel, mass-load and academic integral grammar.
+- `cpvm-kernel`: Viability kernels and Lyapunov-style residuals for hardware.
+- `phoenix-bridge`: CEIM–CPVM bridge daemon for Phoenix water feeds.
+- `nitrate-mar-planner`: Corridor planner for nitrate MAR basins.
+- `pfas-selector`: PFAS treatment selector with CEIM-XJ supreme operator.
+- `cybo-intake-scheduler`: Intake scheduler for TDS and nitrate.
+- `econet-dashboard`: REST API over CEIM shards for EcoNet Phoenix UI.
+
+## Build
+
+```bash
+cargo build --workspace
+cargo test --workspace
+Run examples
+bash
+cargo run -p phoenix-bridge
+cargo run -p econet-dashboard
+text
+
+
+```text
+# quantum-neuromorph-hub/LICENSE
+MIT License
+
+Copyright (c) 2026
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+[full standard MIT text here]
 
 
   quantum-neuromorph-hub/
