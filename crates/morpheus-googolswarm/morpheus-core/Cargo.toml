@@ -1,0 +1,12 @@
+[package]
+name = "morpheus-core"
+version.workspace = true
+edition.workspace = true
+description = "Core governance domain: rights, capabilities, species envelopes, ledgers, and reversal policies for Morpheus."
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+uuid.workspace = true
+chrono.workspace = true
