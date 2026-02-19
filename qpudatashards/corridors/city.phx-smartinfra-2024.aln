@@ -1,0 +1,28 @@
+version 1.0
+schema viva.corridor.profile
+
+corridor
+  id          city.phx-smartinfra-2024
+  tier        Municipal
+  strength    AdvisoryOnly
+  version     2024.1
+  description "Phoenix zoning + large-water-user + data-center ordinances; no FPIC / mental-privacy."
+
+fpic_ids
+  required             false
+  revocable            false
+  community_veto_scope none
+
+neurorights_hgo
+  inner_outer_enforced         false
+  neural_data_safety_only      false
+  requires_opt_out_channels    false
+  forbids_inner_for_access     false
+
+eco_guardrails
+  max_delta_pm25_ug_m3         5.0
+  max_delta_lead_ppb           5.0
+  max_delta_water_use_m3       1e5
+  max_delta_heat_index_c       1.5
+
+proofhex 0xCORRIDOR-PHX-SMART-2024
