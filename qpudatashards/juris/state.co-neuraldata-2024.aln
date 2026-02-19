@@ -1,0 +1,20 @@
+version 1.0
+schema viva.jurisdiction.neuraldata
+
+profile
+  id          state.co-neuraldata-2024
+  scope       NeuralData
+  description "Colorado HB 24-1058 neural data amendments; sensitive data + consent."
+
+constraints
+  require_informed_consent          true
+  forbid_secondary_use_without_consent true
+  forbid_government_non-consensual_collection true
+  neural_data_as_sensitive          true
+
+link
+  applies_to_planes bci.hci.eeg, neuromorph.softwareonly
+  host_local_default                 true
+  export_requires_neuraldata_profile true
+
+proofhex 0xJURIS-CO-NEURAL-2024
