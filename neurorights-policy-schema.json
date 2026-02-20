@@ -1,0 +1,414 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Neurorights Policy Schema",
+  "description": "Machine-enforceable neurorights constraints for Morpheus_Client. Defines forbidden modules, disallowed sanctions, minimum rights floor, and per-jurisdiction governance rules.",
+  "version": "1.0",
+  "type": "object",
+  "required": [
+    "policy_id",
+    "version",
+    "authority",
+    "effective_date",
+    "neurorights_floor",
+    "forbidden_modules",
+    "disallowed_sanctions",
+    "minimum_rights"
+  ],
+  "properties": {
+    "policy_id": {
+      "type": "string",
+      "description": "Unique identifier for this neurorights policy (e.g., 'eu_neurorights_v1', 'chile_amendment_v1')",
+      "examples": [
+        "eu_neurorights_v1",
+        "chile_neurorights_amendment_v1",
+        "phoenix_medical_neurorights_v1"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+(\\.\\d+)?$",
+      "description": "Semantic version of this policy (major.minor.patch)"
+    },
+    "authority": {
+      "type": "string",
+      "description": "Legal authority or source of this policy",
+      "examples": [
+        "EU AI Act, GDPR Article 22",
+        "Chilean Constitutional Amendment",
+        "Phoenix Medical Authority",
+        "Indigenous Steward Council"
+      ]
+    },
+    "effective_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this policy becomes active (ISO 8601)"
+    },
+    "jurisdiction": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Geographic/legal jurisdictions where this policy applies",
+      "examples": [
+        ["EU"],
+        ["Chile"],
+        ["US/Arizona"],
+        ["Indigenous Territory - Atacama"]
+      ]
+    },
+    "neurorights_floor": {
+      "type": "object",
+      "description": "Non-negotiable cognitive liberty and mental autonomy guarantees",
+      "properties": {
+        "freedom_of_thought": {
+          "type": "boolean",
+          "default": true,
+          "description": "No coercive alteration of beliefs, values, or subjective experience"
+        },
+        "mental_privacy": {
+          "type": "boolean",
+          "default": true,
+          "description": "Prohibition on unauthorized monitoring or inference of inner mental states"
+        },
+        "psychological_integrity": {
+          "type": "boolean",
+          "default": true,
+          "description": "Protection against non-consensual psychological or emotional manipulation"
+        },
+        "personal_identity": {
+          "type": "boolean",
+          "default": true,
+          "description": "Right to maintain coherent sense of self; no identity fragmentation or overwrite"
+        }
+      }
+    },
+    "forbidden_modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["module_name", "reason"],
+        "properties": {
+          "module_name": {
+            "type": "string",
+            "description": "Name of the forbidden neural interface or augmentation",
+            "examples": [
+              "dreamtap_recording",
+              "subconscious_monitoring",
+              "dream_complex",
+              "thought_inference_engine",
+              "neural_scoring_for_governance"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why this module is forbidden under this policy",
+            "examples": [
+              "Violates freedom of thought; enables subconscious coercion",
+              "Breaches mental privacy; exports dream/non-volitional content",
+              "Enables automated neurodecisions without explicit consent per GDPR Article 22",
+              "Uses inner-state biomarkers as governance input, violating neurorights floor"
+            ]
+          },
+          "legal_reference": {
+            "type": "string",
+            "description": "Citation to law or regulation that forbids this module",
+            "examples": [
+              "EU AI Act Article 5",
+              "GDPR Article 22",
+              "Chilean Constitution Article 19.19"
+            ]
+          }
+        }
+      },
+      "description": "Neural modules that must never be loaded or active under this policy"
+    },
+    "forbidden_functionalities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["functionality_name", "reason"],
+        "properties": {
+          "functionality_name": {
+            "type": "string",
+            "description": "Specific capability that is forbidden",
+            "examples": [
+              "subconscious_targeting",
+              "neuromarketing",
+              "cognitive_profiling_for_access",
+              "brain_derived_risk_scoring",
+              "dream_content_export",
+              "inner_state_governance_inputs"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why this functionality violates neurorights"
+          },
+          "scope": {
+            "type": "string",
+            "enum": ["module-level", "system-level", "ecosystem-level"],
+            "description": "At what scope is this forbidden"
+          }
+        }
+      }
+    },
+    "disallowed_sanctions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["sanction_type", "reason"],
+        "properties": {
+          "sanction_type": {
+            "type": "string",
+            "description": "Type of penalty or control mechanism forbidden",
+            "examples": [
+              "neuromonitoring_for_compliance",
+              "cognitive_scoring_for_benefits",
+              "brain_state_dependent_access_control",
+              "algorithmic_psychological_intervention",
+              "forced_cognitive_modification",
+              "memory_erasure_or_alteration"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why this sanction mechanism violates neurorights"
+          },
+          "contexts_affected": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Contexts where this sanction is forbidden (e.g., employment, healthcare, benefits access)",
+            "examples": [
+              "employment_decisions",
+              "medical_treatment_eligibility",
+              "benefits_access",
+              "legal_proceedings",
+              "education_enrollment"
+            ]
+          }
+        }
+      },
+      "description": "Specific types of sanctions or control mechanisms that violate neurorights"
+    },
+    "minimum_rights": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["right_name", "description"],
+        "properties": {
+          "right_name": {
+            "type": "string",
+            "description": "Name of non-derogable right",
+            "examples": [
+              "right_to_consent",
+              "right_to_abort",
+              "right_to_mental_privacy",
+              "right_to_identity_persistence",
+              "right_to_non_augmentation",
+              "right_to_disconnect"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed explanation of this right"
+          },
+          "enforcement_mechanism": {
+            "type": "string",
+            "description": "How this right is enforced at the system level",
+            "examples": [
+              "EVOLVE token required; cannot be delegated or transferred",
+              "Hard type-level constraint; cannot be disabled",
+              "Enclave-sealed; cannot be accessed by untrusted code",
+              "Audit ledger; every invocation logged"
+            ]
+          },
+          "derogation_impossible": {
+            "type": "boolean",
+            "default": true,
+            "description": "True if this right cannot be suspended or waived, even in emergencies"
+          }
+        }
+      }
+    },
+    "no_neural_inputs_for_governance": {
+      "type": "boolean",
+      "default": true,
+      "description": "Critical invariant: No raw neural data (EEG, fMRI, neurochemical state) can be used as input to decision-making that affects governance, resource allocation, or access rights"
+    },
+    "no_score_from_inner_state": {
+      "type": "boolean",
+      "default": true,
+      "description": "Corollary: No algorithms, AI models, or heuristics can convert inner-state biomarkers into scores for predicting behavior, risk, or eligibility"
+    },
+    "automated_neurodecisions_forbidden": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, any decision with legal or significant personal effect cannot be made solely based on neural data; requires human review",
+      "note": "Mandated by GDPR Article 22 and EU AI Act Article 5 in certain jurisdictions"
+    },
+    "outer_domain_telemetry_only": {
+      "type": "boolean",
+      "default": true,
+      "description": "System can collect aggregate physiological indices (HRV, inflammation markers, EEG load indices) but never raw inner-domain content (raw EEG, dream reports, inferred thoughts)"
+    },
+    "consent_requirements": {
+      "type": "object",
+      "properties": {
+        "explicit_opt_in": {
+          "type": "boolean",
+          "default": true,
+          "description": "Neural augmentation always requires explicit, informed, revocable consent"
+        },
+        "granular_consent": {
+          "type": "boolean",
+          "default": true,
+          "description": "Consent can be given per-module, per-functionality, per-telemetry-scope"
+        },
+        "consent_revocation_immediate": {
+          "type": "boolean",
+          "default": true,
+          "description": "User can revoke consent at any time; system must cease operation immediately"
+        },
+        "consent_not_continuous": {
+          "type": "boolean",
+          "default": true,
+          "description": "Each significant operation (not each heartbeat) requires fresh consent token (EVOLVE)"
+        },
+        "consent_context_must_be_clear": {
+          "type": "boolean",
+          "default": true,
+          "description": "Consent must explicitly state what data is collected, how it's used, who can access it"
+        }
+      }
+    },
+    "fpic_requirements": {
+      "type": "object",
+      "properties": {
+        "free": {
+          "type": "boolean",
+          "default": true,
+          "description": "Consent is free from coercion, duress, or implicit pressure"
+        },
+        "prior": {
+          "type": "boolean",
+          "default": true,
+          "description": "Consent is obtained before any operation; no retroactive approval"
+        },
+        "informed": {
+          "type": "boolean",
+          "default": true,
+          "description": "Consent is based on complete, understandable information about risks and benefits"
+        },
+        "indigenous_context": {
+          "type": "string",
+          "enum": ["not_required", "recommended", "required"],
+          "default": "recommended",
+          "description": "If 'required', operations in Indigenous territories require community steward approval in addition to individual consent"
+        },
+        "community_veto_possible": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, Indigenous community council can veto individual consent for territorial reasons"
+        }
+      }
+    },
+    "data_minimization": {
+      "type": "object",
+      "properties": {
+        "collect_only_necessary": {
+          "type": "boolean",
+          "default": true,
+          "description": "Never collect data beyond what is necessary for stated purpose"
+        },
+        "retain_minimum_duration": {
+          "type": "boolean",
+          "default": true,
+          "description": "Delete data as soon as purpose is fulfilled"
+        },
+        "aggregate_preferred": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use aggregate statistics instead of individual-level data whenever possible"
+        },
+        "anonymization_required": {
+          "type": "boolean",
+          "default": true,
+          "description": "Any external sharing must be anonymized and irreversibly de-identified"
+        }
+      }
+    },
+    "transparency_requirements": {
+      "type": "object",
+      "properties": {
+        "algorithm_explainability": {
+          "type": "boolean",
+          "default": true,
+          "description": "Any AI/ML model used for decisions must be explainable and auditable"
+        },
+        "audit_trail_public": {
+          "type": "boolean",
+          "default": true,
+          "description": "User can access full audit history of their own data and decisions"
+        },
+        "bias_monitoring_required": {
+          "type": "boolean",
+          "default": true,
+          "description": "System must continuously monitor for algorithmic bias in neural-based decisions"
+        },
+        "independent_review_available": {
+          "type": "boolean",
+          "default": true,
+          "description": "User can request independent expert review of any neurorights decision"
+        }
+      }
+    },
+    "breach_response": {
+      "type": "object",
+      "properties": {
+        "immediate_notification": {
+          "type": "boolean",
+          "default": true,
+          "description": "User must be notified within 24 hours of any neurorights breach"
+        },
+        "escalation_to_regulator": {
+          "type": "boolean",
+          "default": true,
+          "description": "Serious breaches must be reported to relevant regulatory authority"
+        },
+        "remediation_obligation": {
+          "type": "boolean",
+          "default": true,
+          "description": "System operator must take steps to prevent recurrence and repair harm"
+        },
+        "no_suppression_of_reports": {
+          "type": "boolean",
+          "default": true,
+          "description": "User cannot be coerced or penalized for reporting neurorights violations"
+        }
+      }
+    },
+    "implementation_notes": {
+      "type": "string",
+      "description": "Optional implementation guidance for developers and operators"
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Citations to laws, regulations, and ethical frameworks",
+      "examples": [
+        "EU AI Act",
+        "GDPR Article 22",
+        "Chilean Constitution Article 19.19",
+        "UNESCO Neurorights Declaration",
+        "UNDRIP (Indigenous Data Sovereignty)",
+        "Bostrom DID & HIT License v1.0"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
