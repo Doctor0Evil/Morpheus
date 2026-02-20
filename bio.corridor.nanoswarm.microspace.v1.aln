@@ -1,0 +1,73 @@
+SHARD bio.corridor.nanoswarm.microspace.v1
+
+DOMAINS:
+  Microspace:
+    types: { SoilRhizosphere, InsectBody, CoralPolyp, NeuralTissue, ... }
+    properties: { volume_mm³, occupant_organism, ecosystem_role }
+  
+  JurisdictionPolicy:
+    types: { Phoenix_Medical, Chile_Indigenous, EU_GDPR, Custom }
+    properties: { FPIC_required, max_swarm_density%, max_activity_duration_min, ... }
+
+INVARIANTS:
+
+  # Microspace density: never exceed organism-safe limits
+  microspace_density_safe(M: Microspace, S: SwarmState):
+    swarm_volume(S) / volume_mm³(M) ≤ max_density[occupant_organism(M)]
+    
+  # Activity energy: no metabolic interference
+  activity_intensity_safe(M: Microspace, A: Activity):
+    energy_draw(A) ≤ max_activity_power[ecosystem_role(M)]
+    
+  # Duration: prevent chronic stress
+  occupancy_duration_safe(M: Microspace, T: Duration):
+    T ≤ max_occupancy_time[occupant_organism(M)]
+    
+  # Jurisdiction crossing: FPIC + EcoAdmissible
+  crossing_admissible(old_jur: Jurisdiction, new_jur: Jurisdiction, S: SwarmState):
+    FPICStatus(new_jur) = Granted 
+    ∧ EcoAdmissible(new_jur, S) = true
+    ∧ no_organism_displacement(S, new_jur)
+    
+  # RoH monotonicity across all jurisdictions
+  roh_monotone(S_before: SwarmState, S_after: SwarmState, J: Jurisdiction):
+    RoH(S_after) ≤ RoH(S_before)
+    ∧ RoH(S_after) ≤ 0.3
+    
+  # Coherence: macro-emergent safety
+  coherence_safe(S: SwarmState):
+    E_comp(S) = min_k(m_k) ≥ 1.0
+    where m_k = margin for constraint k
+    
+EVIDENCE_TAGS:
+  microspace.soil.rhizosphere.v1:
+    ref: doi:10.1038/nrmicro2832     # Soil microbiome complexity
+    ref: doi:10.1034/j.1469-8137.2002.00019.x  # Root-microbe interactions
+    ceiling_δ: 0.5%  # implant saturation threshold before anoxia
+    
+  microspace.insect.thorax.v1:
+    ref: doi:10.1242/jeb.202.2.203    # Bee flight mechanics
+    ref: doi:10.1016/j.cub.2016.01.011  # Insect neural load
+    ceiling_δ: 0.1%  # motor neuron interference threshold
+    
+  microspace.coral.zooxanthella.v1:
+    ref: doi:10.1038/nature06957       # Coral bleaching
+    ref: doi:10.1038/s41467-018-08282-1  # Symbiont recovery kinetics
+    ceiling_δ: 0.05%  # symbiont exclusion onset
+    
+STATUS_MESSAGES:
+  MICROSPACE_CLEAR:
+    condition: all M ∈ target_location satisfy microspace_density_safe
+    action: allow swarm motion
+    
+  MICROSPACE_SATURATION:
+    condition: ∃M where swarm_volume(S) / volume(M) > max_density[M]
+    action: deny motion, emit MicrospaceViolation event
+    
+  CROSSING_APPROVED:
+    condition: crossing_admissible(old, new, S) ∧ all gates pass
+    action: log EvolutionAuditRecord(swarm_DID, new_jurisdiction, FPIC_ref, ...)
+    
+  CROSSING_DENIED:
+    condition: FPIC not granted OR EcoAdmissible false OR RoH_violation
+    action: trigger safe-retreat, log INCURSION or CONSENT_MISSING event
