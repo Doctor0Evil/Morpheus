@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "required": ["version", "licenseId", "systemId", "humanOversightRequired",
+               "abortControlRequired", "labelAiSegments", "emitProvenanceMetadata",
+               "forbidCovertInference", "forbidCoerciveChannels",
+               "requireConsentForPersonalData", "requireFpicForIndigenousData"],
+  "properties": {
+    "version": { "type": "string", "enum": ["hit-governance-object.v1"] },
+    "licenseId": { "type": "string" },       // "HIT-License-v1.0"
+    "systemId": { "type": "string" },        // e.g. "morpheus-android-client"
+    "humanOversightRequired": { "type": "boolean" },
+    "abortControlRequired": { "type": "boolean" },
+    "labelAiSegments": { "type": "boolean" },
+    "emitProvenanceMetadata": { "type": "boolean" },
+    "forbidCovertInference": { "type": "boolean" },
+    "forbidCoerciveChannels": { "type": "boolean" },
+    "requireConsentForPersonalData": { "type": "boolean" },
+    "requireFpicForIndigenousData": { "type": "boolean" }
+  }
+}
