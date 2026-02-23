@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "required": [
+    "version", "txId", "subjectDid",
+    "corridorContext", "hitGovernance",
+    "preSovereignty", "postSovereignty",
+    "distilledKnowledgeHash", "decision"
+  ],
+  "properties": {
+    "version": { "type": "string", "enum": ["evolution-audit-record.v1"] },
+    "txId": { "type": "string" },
+    "subjectDid": { "type": "string" },
+    "corridorContext": { "$ref": "eco_corridor_context.v1.json" },
+    "hitGovernance": { "$ref": "hit_governance_object.v1.json" },
+    "preSovereignty": {
+      "type": "object",
+      "required": ["sovereigntyLevel"],
+      "properties": {
+        "sovereigntyLevel": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "postSovereignty": {
+      "type": "object",
+      "required": ["sovereigntyLevel"],
+      "properties": {
+        "sovereigntyLevel": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "distilledKnowledgeHash": { "type": "string" },
+    "decision": {
+      "type": "string",
+      "enum": ["Allow", "DeferToHuman", "Deny"]
+    }
+  }
+}
