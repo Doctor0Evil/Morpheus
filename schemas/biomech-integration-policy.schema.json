@@ -1,0 +1,49 @@
+{
+  "$id": "https://morpheus.aln/schemas/biomech-integration-policy.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Biomechanical Integration Policy",
+  "type": "object",
+  "properties": {
+    "deviceId": { "type": "string" },
+    "hostId": { "type": "string" },
+
+    "biostate_control_origin": {
+      "type": "string",
+      "enum": ["host_local_only", "hybrid", "remote"],
+      "default": "host_local_only"
+    },
+
+    "declaredCapabilities": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    }
+  },
+  "required": ["deviceId", "hostId", "biostate_control_origin"],
+
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "biostate_control_origin": { "const": "host_local_only" }
+        }
+      },
+      "then": {
+        "not": {
+          "properties": {
+            "declaredCapabilities": {
+              "contains": {
+                "enum": [
+                  "remote_biostate_control",
+                  "remote_neurofeedback_control",
+                  "offchain_biophysical_actuation",
+                  "validator_driven_pacing"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
