@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "properties": {
+    "record_id": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+
+    "subject_did": { "type": "string" },
+    "host_id": { "type": "string" },
+
+    "biocontrol_origin": {
+      "type": "string",
+      "enum": ["host_local_only"],
+      "default": "host_local_only"
+    },
+
+    "origin_module_id": { "type": "string" },
+
+    "noRemoteControlOverBioState": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "record_id",
+    "timestamp",
+    "subject_did",
+    "host_id",
+    "biocontrol_origin",
+    "origin_module_id",
+    "noRemoteControlOverBioState"
+  ]
+}
