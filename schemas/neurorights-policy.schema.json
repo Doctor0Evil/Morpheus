@@ -1,0 +1,61 @@
+{
+  "$id": "https://morpheus.aln/schemas/neurorights-policy.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Neurorights Policy Profile",
+  "type": "object",
+  "properties": {
+    "profileId": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+
+    "noNeuralInputsForGovernance": {
+      "type": "boolean",
+      "default": true
+    },
+    "rights.noscorefrominnerstate": {
+      "type": "boolean",
+      "default": true
+    },
+
+    "noRemoteControlOverBioState": {
+      "type": "boolean",
+      "description": "If true, no admissible module may alter BioState/BCI/RoH/FEAR/PAIN using remote or off-host inputs.",
+      "default": true
+    },
+
+    "disallowedCapabilities": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": [
+        "remote_biostate_control",
+        "remote_neurofeedback_control",
+        "offchain_biophysical_actuation",
+        "validator_driven_pacing",
+        "neural_compliance_scoring"
+      ]
+    }
+  },
+  "required": [
+    "profileId",
+    "version",
+    "noNeuralInputsForGovernance",
+    "rights.noscorefrominnerstate",
+    "noRemoteControlOverBioState",
+    "disallowedCapabilities"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "noRemoteControlOverBioState": { "const": true }
+        }
+      },
+      "then": {
+        "description": "Profiles with noRemoteControlOverBioState = true MUST reject modules declaring remote bio-control capabilities."
+      }
+    }
+  ]
+}
