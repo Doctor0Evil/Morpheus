@@ -3,23 +3,48 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Biomechanical Integration Policy",
   "type": "object",
+
   "properties": {
-    "deviceId": { "type": "string" },
-    "hostId": { "type": "string" },
+    "policyId": {
+      "type": "string",
+      "description": "Logical identifier for this biomech policy."
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version string."
+    },
+
+    "deviceId": {
+      "type": "string",
+      "description": "Device or module identifier."
+    },
+    "hostId": {
+      "type": "string",
+      "description": "Host node / enclave identifier."
+    },
 
     "biostate_control_origin": {
       "type": "string",
       "enum": ["host_local_only", "hybrid", "remote"],
+      "description": "Where biostate control decisions originate.",
       "default": "host_local_only"
     },
 
     "declaredCapabilities": {
       "type": "array",
+      "description": "Capabilities the device/module claims.",
       "items": { "type": "string" },
       "default": []
     }
   },
-  "required": ["deviceId", "hostId", "biostate_control_origin"],
+
+  "required": [
+    "policyId",
+    "version",
+    "deviceId",
+    "hostId",
+    "biostate_control_origin"
+  ],
 
   "allOf": [
     {
